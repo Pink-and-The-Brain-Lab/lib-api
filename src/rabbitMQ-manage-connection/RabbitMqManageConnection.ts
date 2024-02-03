@@ -1,6 +1,6 @@
 import amqplib, { Channel, Connection } from 'amqplib';
 
-class RabbitMqManageConnection {
+export class RabbitMqManageConnection {
     private CONNECTION: Connection;
     private host: string;
 
@@ -19,5 +19,3 @@ class RabbitMqManageConnection {
         this.CONNECTION.close();
     }
 }
-
-export default RabbitMqManageConnection;

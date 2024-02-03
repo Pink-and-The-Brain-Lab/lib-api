@@ -1,7 +1,11 @@
 {
   "name": "millez-lib-api",
-  "version": "0.0.4",
-  "main": "index.js",
+  "version": "0.0.16",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {},
   "keywords ": [],
   "repository": {
