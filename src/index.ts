@@ -7,5 +7,4 @@ export { ValidateToken } from './utils/ValidateToken';
 export { GetTokenData } from './utils/GetTokenData';
 export { IValidationTokenData } from './utils/interfaces/validation-token-data.interface';
 export { AppError } from './errors/AppError';
-export { uploadConfig } from './utils/upload-config';
 export { clientErrorHandle } from './errors/client-error-handler';
