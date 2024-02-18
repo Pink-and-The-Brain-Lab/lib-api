@@ -3,7 +3,7 @@ export interface IValidationTokenData {
     createdAt?: Date;
     validated?: boolean;
     status?: string;
-    message?: string;
+    message?: any;
     statusCode?: number;
     sub?: string;
     expiredAt?: number

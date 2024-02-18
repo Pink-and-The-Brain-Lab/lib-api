@@ -15,9 +15,9 @@ export class ValidateToken {
         try {
             const getTokenData = new GetTokenData(this.queue, this.responseQueue)
             const token = await getTokenData.get(request);
-            if (!token || token.expiredAt) throw new AppError(
-                token?.expiredAt ? token?.message || '' : 'API_ERRORS.NOT_ALLOWED',
-                401
+            if (!token || token.expiredAt || token.statusCode) throw new AppError(
+                token?.message?.message || token?.message || 'API_ERRORS.NOT_ALLOWED',
+                token?.statusCode || 401
             );
             next();
         } catch (error) {
