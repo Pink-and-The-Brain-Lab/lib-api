@@ -4,7 +4,7 @@ import { AppError } from './AppError';
 const clientErrorHandle = (error: Error, request: Request, response: Response, next: NextFunction) => {
     if (error instanceof AppError) {
         return response.status(error.statusCode || 500).json({
-            status: error.statusCode,
+            status: error.statusCode || 500,
             message: error.message
         });
     }
