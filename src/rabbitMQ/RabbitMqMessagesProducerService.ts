@@ -32,7 +32,11 @@ export class RabbitMqMessagesProducerService {
     ): Promise<T> {
         return new Promise(resolve => {
             channel.consume(responseQueue, (message: ConsumeMessage | null) => {
-                if (message?.properties.correlationId === correlationId) {
+                if (!message) {
+                    const response: T = {} as T;
+                    resolve(response);
+                    this.connection.closeConnection();
+                } else if (message.properties.correlationId === correlationId) {
                     const response: T = JSON.parse(message.content.toString());
                     resolve(response);
                     this.connection.closeConnection();
