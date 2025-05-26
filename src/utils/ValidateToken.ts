@@ -5,19 +5,22 @@ import { GetTokenData } from "./GetTokenData";
 export class ValidateToken {
     private queue: string;
     private responseQueue: string;
+    private connection: string;
 
-    constructor(queue: string, responseQueue: string) {
+    constructor(queue: string, responseQueue: string, connection: string) {
         this.queue = queue;
         this.responseQueue = responseQueue;
+        this.connection = connection;
     }
 
     validate = async (request: Request<any>, response: Response, next: NextFunction) => {
         try {
-            const getTokenData = new GetTokenData(this.queue, this.responseQueue)
+            const getTokenData = new GetTokenData(this.queue, this.responseQueue, this.connection);
             const token = await getTokenData.get(request);
-            if (!token || token.expiredAt || token.statusCode) throw new AppError(
-                token?.message?.message || token?.message || 'API_ERRORS.NOT_ALLOWED',
-                token?.statusCode || 401
+            if (!token) throw new AppError('API_ERRORS.NOT_ALLOWED', 401);
+            if (token.expiredAt || token.statusCode) throw new AppError(
+                token.message || 'API_ERRORS.NOT_ALLOWED',
+                token.statusCode || 401
             );
             next();
         } catch (error) {
